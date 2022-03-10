@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
+    <title>First Bulma Example</title>
+
+    <style>
+        .is-finish {
+            text-decoration: line-through;
+        }
+        .datetime {
+        font-weight: bold;
+      }
+    </style>
+</head>
+<body >
+    <div id="app">
+    <nav class="navbar is-dark">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="https://www.oxappportal.com/">
+            
+              <img src="logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="40" height="40">
+            
+          </a>
+          <div class="navbar-burger" data-target="navMenuColorprimary-example">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      
+        <div id="navMenuColorprimary-example" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item"  target="_blank" href="https://www.oxappportal.com/">
+              Home
+            </a>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="https://bulma.io/documentation/overview/start/">
+                Docs
+              </a>
+              <div class="navbar-dropdown">
+                <a class="navbar-item" href="https://bulma.io/documentation/overview/start/">
+                  Overview
+                </a>
+                <a class="navbar-item" href="https://bulma.io/documentation/overview/modifiers/">
+                  Modifiers
+                </a>
+                <a class="navbar-item" href="https://bulma.io/documentation/columns/basics/">
+                  Columns
+                </a>
+                <a class="navbar-item" href="https://bulma.io/documentation/layout/container/">
+                  Layout
+                </a>
+                <a class="navbar-item" href="https://bulma.io/documentation/form/general/">
+                  Form
+                </a>
+                <hr class="navbar-divider">
+                <a class="navbar-item" href="https://bulma.io/documentation/elements/box/">
+                  Elements
+                </a>
+                <a class="navbar-item is-active" href="https://bulma.io/documentation/components/breadcrumb/">
+                  Components
+                </a>
+              </div>
+            </div>
+          </div>
+      
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="field is-grouped">
+                <p class="control">
+                  <a class="bd-tw-button button is-dark is-danger"  target="_blank" href="https://en.wikipedia.org/wiki/Main_Page">
+                    <span class="icon">
+                      <i class="fab fa-wikipedia-w"></i>
+                    </span>
+                    <span>
+                      Wikipedia
+                    </span>
+                  </a>
+                </p>
+                <p class="control">
+                  <a class="button is-dark is-danger"  target="_blank" href="https://www.belohith.com/">
+                    <span class="icon">
+                      <i class="fas fa-network-wired"></i>
+                    </span>
+                    <span>My Website</span>
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="section">
+          <div class="container">
+            <div class="columns">
+                <div class="column is-one-quarter">
+                    <div class="card">
+                        <header class="card-header">
+                          <p class="card-header-title">
+                            ox: an app portal
+                          </p>
+                          <button class="card-header-icon" aria-label="more options">
+                            <span class="icon">
+                              <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            </span>
+                          </button>
+                        </header>
+                        <div class="card-content">
+                          <div class="content">
+                            {{ message }}
+                            <br/>
+                            <br/>
+                            <time class= "datetime" datetime="2016-1-1">06:09 AM - 20 Apr 2021</time>
+                          </div>
+                        </div>
+                        <footer class="card-footer">
+                          <a href="#" class="card-footer-item">Save</a>
+                          <a href="#" class="card-footer-item">Edit</a>
+                          <a href="#" class="card-footer-item">Delete</a>
+                        </footer>
+                      </div>
+
+                </div>
+                <div class="column is-half">
+                    <article class="panel">
+                        
+                        <div class="tabs is-boxed">
+                            <ul>
+                              <li :class="{ 'is-active': currentTab == 'Current'}" @click="changeTab('Current')">
+                                <a>
+                                  <span class="icon is-small"><i class="fas fa-clipboard-list"></i></span>
+                                  <span>Current</span>
+                                </a>
+                              </li>
+                              <li :class="{ 'is-active': currentTab == 'Completed'}" @click="changeTab('Completed')">
+                                <a>
+                                  <span class="icon is-small"><i class="fas fa-calendar-times"></i></span>
+                                  <span>Completed</span>
+                                </a>
+                              </li>
+                              <li :class="{ 'is-active': currentTab == 'Upcoming'}" @click="changeTab('Upcoming')">
+                                <a>
+                                  <span class="icon is-small"><i class="fas fa-calendar-day"></i></span>
+                                  <span>Upcoming</span>
+                                </a>
+                              </li>
+                              <li :class="{ 'is-active': currentTab == 'All'}" @click="changeTab('All')">
+                                <a>
+                                  <span class="icon is-small"><i class="fas fa-calendar"></i></span>
+                                  <span>All</span>
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="panel-block">
+
+                            <form @submit.prevent="addTask" style="flex-grow: 1;">
+                            <div class="field has-addons " >
+                              <div class="control has-icons-left is-expanded">
+                                  <input class="input is-danger" type="text" placeholder="New Task" v-model="newTaskName">
+                                  <span class="icon is-left">
+                                      <i class="fas fa-calendar-plus" aria-hidden="true"></i>
+                                  </span>
+                              </div>
+                              <div class="control">
+                                  <button class="button is-danger">
+                                      Add
+                                  </button>
+                              </div>
+  
+                            </div>
+                            </form>
+  
+                          </div>
+                          <a class="panel-block" v-for="task in finishTasks" :key="task.title" :class="{ 'is-finish': currentTab != 'Finish' && task.isFinish }">
+                            <input type="checkbox" v-model="task.isFinish" />
+                            {{ task.title }}
+                          </a>
+
+                      </article>
+                </div>
+                <div class="column is-one-quarter">
+                    <h2 class="title">What is OX?</h2>
+                    <h3 class="subtitle">a brief desciption</h3>
+                    <aside class="menu">
+                        <p class="menu-label">
+                          Intro
+                        </p>
+                        <ul class="menu-list">
+                          <li><a>It is a platform to host apps related to different platforms!</a></li>
+                          <li><a>Each user can also host their apps/projects.</a></li>
+                          <li><a>In addition, users can add descriptions to the app.</a></li>
+                        </ul>
+                                              </aside>
+                </div>
+
+            </div>
+
+          </div>
+
+      </div>
+    </div>
+      <script src="https://unpkg.com/vue@3"></script>
+
+
+        <script>
+            Vue.createApp({
+                data() {
+                    return {
+                        message: 'ox is an app portal for apps on different platforms!',
+                        currentTab: 'All',
+                        newTaskName: '',
+                        tasks: [
+                            { title: 'Make Bulma great again', isFinish: true },
+                            { title: 'Add some more features', isFinish: false },
+                            { title: 'Make a github account', isFinish: false },
+                            { title: 'Learn how to use github', isFinish: false },
+                            { title: 'add a .gitignore file', isFinish: false },
+                            
+                        ]
+                    }
+                },
+                methods: {
+                    changeTab(tab) {
+                        this.currentTab = tab;
+                    },
+                    addTask() {
+                        this.tasks.unshift({
+                            title: this.newTaskName,
+                            finish: false
+                        });
+                        this.newTaskName = '';
+                    }
+                },
+                computed: {
+                    finishTasks() {
+                        if (this.currentTab == 'Current') {
+                            return this.tasks.filter(task => !task.isFinish);}
+                     else if (this.currentTab == 'Completed'){
+                      return this.tasks.filter(task => task.isFinish);
+                     } else {
+                      return this.tasks;
+                     }
+                    }
+                }
+            }).mount('#app')
+        </script>
+</body>
+</html>
